@@ -1,2 +1,2 @@
 # Speedy Deformable 3D Gaussian Splatting
-This repository contains additional results and website source files for [Speedy Deformable 3D Gaussian Splatting](https://speede3dgs.github.io/).
+This repository contains additional results and website source files for [Speedy Deformable 3D Gaussian Splatting](https://speede3dgs.github.io/). Running icon created by [Freepik](https://www.flaticon.com/free-icon/running_763812).
