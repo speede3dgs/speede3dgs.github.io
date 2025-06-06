@@ -3,7 +3,7 @@ window.HELP_IMPROVE_VIDEOJS = false;
 document.addEventListener('DOMContentLoaded', function () {
   const options = {
     slidesToScroll: 1,
-    slidesToShow: 2.3,
+    slidesToShow: 2,
     centerMode: true,
     loop: true,
     infinite: true,
