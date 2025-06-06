@@ -82,7 +82,8 @@
                             <div class="publication-links">
                                 <!-- PDF Link. -->
                                 <span class="link-block">
-                                    <a href="./static/files/SpeeDe3DGS.pdf" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="./static/files/SpeeDe3DGS.pdf"
+                                        class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
                                             <i class="fas fa-file-pdf"></i>
                                         </span>
@@ -160,18 +161,55 @@
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Method</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Neural network inference is a major bottleneck in rendering speed for deformable 3DGS
+                            models. We propose two methods to reduce this cost: <b>Temporal Sensitivity Pruning</b> and
+                            <b>GroupFlow</b>. While our SpeeDe3DGS approach
+                            extends Deformable 3DGS, our methods are general and can be applied to any
+                            similar deformable 3DGS or 4DGS framework.
+                        </p>
+                    </div>
 
-                    <!-- <p>
-                        The rendering speed of 3D Gaussian Splatting (3D-GS) is primarily determined by two factors:
-                    </p>
-                    <ol>
-                        <li>The <strong>number of Gaussians allocated to each pixel</strong>, and</li>
-                        <li>The <strong>total number of Gaussians</strong> in the scene.</li>
-                    </ol>
-                    <p>Speedy-Splat introduces methods to address each of these.</p>
-                    <h3 class="title is-4">Number of Primitives</h2> -->
+
+                    <h3 class="title is-4">Temporal Sensitivity Pruning</h2>
 
                         <div class="content has-text-justified">
+                            <!-- <div class="video-compare-container">
+                                <video class="video" width=800p id="v2" loop playsinline autoplay muted
+                                    src="static/videos/bell_asp.mp4" onplay="resizeAndPlay(this)"></video>
+                                <canvas height=0 class="videoMerge" id="v2Merge"></canvas>
+                            </div> -->
+                            <div class="columns is-centered mt-5">
+                                <div class="content has-text-justified">
+                                    <p>
+                                        Reducing the number of Gaussians directly reduces neural inference load, so we
+                                        extend the <a href="https://speedysplat.github.io/">Speedy-Splat</a> pruning
+                                        score to the temporal dimension. For each Gaussian \(\mathcal{G}_i\), we
+                                        calculate a sensitivity pruning score \(\tilde{U}_{\mathcal{G}_i}\) derived from
+                                        its second-order sensitivity to the \(L_2\) loss across all training views:
+
+                                        \[
+                                        \tilde{U}_{\mathcal{G}_i} \approx \nabla_{g_i}^2 L_2 \approx \sum_{\phi, t \in
+                                        \mathcal{P}_{gt}} \left( \nabla_{g_i} I_{\mathcal{G}_t}(\phi) \right)^2,
+                                        \]
+
+                                        where \(g_i\) is the value of \(\mathcal{G}_i\) projected onto image space,
+                                        \(\mathcal{P}_{gt}\) is the training set, and \(I_{\mathcal{G}_t}(\phi)\) is the
+                                        rendered
+                                        image at pose \(\phi\) and timestep \(t\).
+                                        <br><br>
+                                        Since deformation updates vary
+                                        acrosss timesteps, these
+                                        gradients are
+                                        inherently time-dependent and capture the second-order effects of each Gaussian
+                                        <i>and its deformations</i> on the dynamic scene reconstruction. As such, our
+                                        resulting <b>temporal sensitivity pruning score</b> accounts for each Gaussian's
+                                        contribution over time. We use this score to prune Gaussians from the model
+                                        during training.
+                                    </p>
+                                </div>
+                            </div>
                             <div class="video-compare-container">
                                 <video class="video" width=800p id="v2" loop playsinline autoplay muted
                                     src="static/videos/bell_asp.mp4" onplay="resizeAndPlay(this)"></video>
@@ -179,23 +217,35 @@
                             </div>
                             <div class="columns is-centered mt-5">
                                 <div class="content has-text-justified">
-                                    <p>
-                                        ASP mitigates artifacts introduced by pruning and can even reduce artifacts
-                                        present in unpruned models. Temporal artifacts often appear only at specific
-                                        timesteps and may go undetected when sensitivity scores are computed using fixed
-                                        timestamps. By injecting noise into the timestamps, ASP lowers the temporal
-                                        sensitivity scores of the Gaussians responsible for these artifacts, promoting
-                                        their early removal while allowing for finer refinement later in training. The
-                                        video above illustrates an example where ASP produces cleaner results than both
-                                        standard pruning and the unpruned baseline.
+                                    Additionally, we introduce a noise-based <b>annealing smooth pruning (ASP)</b>
+                                    mechanism
+                                    that mitigates artifacts introduced by pruning and can
+                                    even reduce artifacts present in unpruned models. The comparison video above
+                                    illustrates an
+                                    example where pruning with ASP produces
+                                    cleaner results than both standard pruning and the unpruned baseline.
+                                    <br><br>
                                     </p>
                                 </div>
                             </div>
 
                         </div>
+
+                        <h3 class="title is-4">GroupFlow</h2>
+                            <img src="static/images/fig_GroupFlow.png" alt="GroupFlow">
+                            <div class="content has-text-justified">
+
+                                <p>
+                                    <br>
+                                    GroupFlow is a motion analysis technique that clusters Gaussians by trajectory
+                                    similarity
+                                    and predicts a single rigid transformation per group instead of separate
+                                    deformations for
+                                    each Gaussian.
+                                </p>
+                            </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <section class="hero">
