@@ -198,11 +198,6 @@
                     <h3 class="title is-4">Temporal Sensitivity Pruning</h2>
 
                         <div class="content has-text-justified">
-                            <!-- <div class="video-compare-container">
-                                <video class="video" width=800p id="v2" loop playsinline autoplay muted
-                                    src="static/videos/bell_asp.mp4" onplay="resizeAndPlay(this)"></video>
-                                <canvas height=0 class="videoMerge" id="v2Merge"></canvas>
-                            </div> -->
                             <div class="columns is-centered mt-5">
                                 <div class="content has-text-justified">
                                     <p>
@@ -233,7 +228,7 @@
                             </div>
                             <div class="video-compare-container">
                                 <video class="video" width=800p id="v2" loop playsinline autoplay muted
-                                    src="static/videos/bell_asp.mp4" onplay="resizeAndPlay(this)"></video>
+                                    src="static/videos/bell_side_by_side.mp4" onplay="resizeAndPlay(this)"></video>
                                 <canvas height=0 class="videoMerge" id="v2Merge"></canvas>
                             </div>
                             <div class="columns is-centered mt-5">
@@ -253,7 +248,7 @@
 
                         <h3 class="title is-4">GroupFlow</h3>
 
-                        <img src="static/images/fig_GroupFlow.png" alt="GroupFlow"
+                        <img src="static/images/groupflow.png" alt="GroupFlow"
                             style="margin-bottom: 1.5rem; max-width: 100%; height: auto;">
 
                         <div class="content has-text-justified">
@@ -330,6 +325,16 @@
                                 <source src="static/videos/cup.mp4" type="video/mp4">
                             </video>
                         </div>
+                        <div class="item item-plate">
+                            <video poster="" id="plate" autoplay controls muted loop playsinline height="100%">
+                                <source src="static/videos/plate.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item item-sieve">
+                            <video poster="" id="sieve" autoplay controls muted loop playsinline height="100%">
+                                <source src="static/videos/sieve.mp4" type="video/mp4">
+                            </video>
+                        </div>
                     </div>
                     <div id="results-carousel" class="carousel results-carousel">
                         <div class="item item-trex">
@@ -342,6 +347,11 @@
                                 <source src="static/videos/bouncingballs.mp4" type="video/mp4">
                             </video>
                         </div>
+                        <div class="item item-hellwarrior">
+                            <video poster="" id="hellwarrior" autoplay controls muted loop playsinline height="100%">
+                                <source src="static/videos/hellwarrior.mp4" type="video/mp4">
+                            </video>
+                        </div>
                         <div class="item item-hook">
                             <video poster="" id="hook" autoplay controls muted loop playsinline height="100%">
                                 <source src="static/videos/hook.mp4" type="video/mp4">
@@ -352,10 +362,57 @@
                                 <source src="static/videos/jumpingjacks.mp4" type="video/mp4">
                             </video>
                         </div>
+                        <div class="item item-lego">
+                            <video poster="" id="lego" autoplay controls muted loop playsinline height="100%">
+                                <source src="static/videos/lego.mp4" type="video/mp4">
+                            </video>
+                        </div>
                         <div class="item item-mutant">
                             <video poster="" id="mutant" autoplay controls muted loop playsinline height="100%">
                                 <source src="static/videos/mutant.mp4" type="video/mp4">
                             </video>
+                        </div>
+                        <div class="item item-standup">
+                            <video poster="" id="standup" autoplay controls muted loop playsinline height="100%">
+                                <source src="static/videos/standup.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered has-text-centered">
+                        <div class="column is-four-fifths">
+                            <p>
+                                <em>Videos produced using our SpeeDe3DGS codebase.</em>
+                            </p>
+                            <figure>
+                                <figcaption class="has-text-justified"
+                                    style="font-style:normal; margin-top:2em; margin-bottom:1em;">
+                                    Table 2. <strong>Results on Monocular Dynamic Gaussian Splatting Benchmark
+                                        (MonoDyGauBench) [<a
+                                            href="https://brownvc.github.io/MonoDyGauBench.github.io/">25</a>].</strong>
+                                    Quantitative results are averaged across five datasets and fifty scenes for all
+                                    methods in
+                                    Section 3.1. We <strong><em>cumulatively</em></strong> apply our methods to the
+                                    DeformableGS [<a href="https://ingra14m.github.io/Deformable-Gaussians/">51</a>] and
+                                    4DGS [<a href="https://guanjunwu.github.io/4dgs/index.html">47</a>] baselines
+                                    (<em>italicized</em>
+                                    and excluded from highlighting). Each experiment is repeated three times and
+                                    averaged. The <span
+                                        style="background-color:#86E655; padding:0 3px; border-radius:3px;">best</span>
+                                    and <span
+                                        style="background-color:#D0F0C0; padding:0 3px; border-radius:3px;">second-best</span>
+                                    results are highlighted; improvements over corresponding baselines are
+                                    <strong>bolded</strong>.
+                                    FPS and baseline Train&nbsp;Time are measured on an RTX&nbsp;3090&nbsp;GPU, while
+                                    our
+                                    Train&nbsp;Time* is measured on an RTX&nbsp;A5000&nbsp;GPU (both&nbsp;24&nbsp;GB).
+                                    Appendix A.3
+                                    reports per-dataset results.
+                                </figcaption>
+                                <img src="./static/images/monodygaubench.png"
+                                    alt="Overall ROC performance table results" style="width:100%; height:auto;">
+                            </figure>
                         </div>
                     </div>
                 </div>
