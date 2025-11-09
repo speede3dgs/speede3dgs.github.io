@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="description"
-        content="Speedy Deformable 3D Gaussian Splatting: Fast Rendering and Compression of Dynamic Scenes">
+        content="SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping">
     <meta name="keywords"
-        content="3D Gaussian Splatting, Dynamic Scenes, Neural Rendering, Computer Graphics, Deformable 3D Gaussian Splatting, De3DGS, Deformable 3DGS, 3DGS">
+        content="3D Gaussian Splatting, Dynamic Scenes, Neural Rendering, Computer Graphics, Deformable 3D Gaussian Splatting, De3DGS, Deformable 3DGS, DeformableGS, 3DGS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Speedy Deformable 3D Gaussian Splatting: Fast Rendering and Compression of Dynamic Scenes</title>
+    <title>SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J5JNGRK3L"></script>
     <script>
@@ -45,8 +45,8 @@
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title">Speedy Deformable 3D Gaussian Splatting: Fast Rendering
-                            and Compression of Dynamic Scenes</h1>
+                        <h1 class="title is-1 publication-title">SpeeDe3DGS: Speedy Deformable <br>3D Gaussian Splatting
+                            with<br>Temporal Pruning and Motion Grouping</h1>
                         <div class="is-size-5 publication-authors">
                             <span class="author-block">
                                 <a href="https://tuallen.github.io">Allen Tu*</a>,</span>
@@ -135,29 +135,23 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Recent extensions of 3D Gaussian Splatting (3DGS) to dynamic scenes achieve high-quality
-                            novel view synthesis by using neural networks to predict the time-varying deformation of
-                            each Gaussian. However, performing per-Gaussian neural inference at every frame poses a
-                            significant bottleneck, limiting rendering speed and increasing memory and compute
-                            requirements.
+                            Dynamic extensions of 3D Gaussian Splatting (3DGS) achieve high-quality reconstructions
+                            through neural motion fields, but per-Gaussian neural inference makes these models
+                            computationally expensive.
                         </p>
                         <p>
-                            In this paper, we present Speedy Deformable 3D Gaussian Splatting
-                            (SpeeDe3DGS), a general pipeline for accelerating the rendering speed of dynamic 3DGS and
-                            4DGS representations by reducing neural inference through two complementary techniques.
-                            First, we propose a temporal sensitivity pruning score that identifies and removes Gaussians
-                            with low contribution to the dynamic scene reconstruction. We also introduce an annealing
-                            smooth pruning mechanism that improves pruning robustness in real-world scenes with
-                            imprecise camera poses. Second, we propose GroupFlow, a motion analysis technique that
-                            clusters Gaussians by trajectory similarity and predicts a single rigid transformation per
-                            group instead of separate deformations for each Gaussian.
+                            Building on DeformableGS, we introduce Speedy Deformable 3D Gaussian Splatting (SpeeDe3DGS),
+                            which bridges this efficiency–fidelity gap through three complementary modules. Temporal
+                            Sensitivity Pruning (TSP) removes low-impact Gaussians via temporally aggregated sensitivity
+                            analysis, while Temporal Sensitivity Sampling (TSS) perturbs timestamps to suppress floaters
+                            and improve temporal coherence. GroupFlow distills the learned deformation field into shared
+                            SE(3) transformations for efficient groupwise motion.
                         </p>
                         <p>
-                            Together, our techniques
-                            accelerate rendering by 10.37×, reduce model size by 7.71×, and shorten
-                            training time by 2.71× on the NeRF-DS dataset. SpeeDe3DGS also improves rendering
-                            speed by 4.20× and 58.23× on the D-NeRF and HyperNeRF <em>vrig</em> datasets.
-                            Our methods are modular and can be integrated into any deformable 3DGS or 4DGS framework.
+                            On the 50 dynamic scenes in MonoDyGauBench, integrating TSP and TSS into DeformableGS
+                            accelerates rendering by 6.78× on average while maintaining neural-field fidelity and using
+                            10× fewer primitives. Adding GroupFlow culminates in 13.71× faster rendering and 2.53×
+                            shorter training, surpassing all baselines in speed while preserving superior image quality.
                         </p>
                     </div>
                 </div>
@@ -172,126 +166,143 @@
                     <h2 class="title is-3">Method</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Neural inference is a major bottleneck in rendering speed for dynamic 3DGS representations.
-                            <b>Speedy Deformable 3D Gaussian Splatting (SpeeDe3DGS)</b> accelerates rendering speed by
-                            leveraging two key insights for reducing inference cost:
+                            Neural motion fields in dynamic 3D Gaussian Splatting (3DGS) enable highly detailed
+                            reconstructions, but per-Gaussian neural inference at every frame limits real-time
+                            performance.
+                            <b>Speedy Deformable 3D Gaussian Splatting (SpeeDe3DGS)</b> bridges this efficiency–fidelity
+                            gap through three complementary modules that jointly reduce redundant inference, stabilize
+                            temporal consistency, and distill neural motion into compact rigid representations:
                         </p>
                         <ol>
-                            <li>
-                                A deformation is predicted for every Gaussian, so <b>pruning Gaussians</b> with low
-                                contribution to the dynamic scene reconstruction directly lowers the inference load.
+                            <li><b>Temporal Sensitivity Pruning (TSP)</b> removes redundant Gaussians by aggregating
+                                their gradient sensitivity across both space and time.</li>
+                            <li><b>Temporal Sensitivity Sampling (TSS)</b> enhances pruning stability by perturbing
+                                timestamps during sensitivity estimation, suppressing floaters and improving temporal
+                                coherence.
                             </li>
-                            <li>
-                                Gaussians that follow similar motion patterns can be grouped, enabling a <b>single
-                                    shared trajectory to be predicted for each group</b> instead of separate
-                                deformations for each Gaussian.
-                            </li>
+                            <li><b>GroupFlow</b> clusters Gaussians with similar motion trajectories, replacing
+                                per-Gaussian deformations with shared groupwise SE(3) transformations.</li>
                         </ol>
                         <p>
-                            While we integrate our approach into <a
-                                href='https://ingra14m.github.io/Deformable-Gaussians/'>Deformable 3D Gaussians</a>,
-                            our methods are modular and can be applied to any similar deformable 3DGS or 4DGS framework.
+                            Implemented on top of <a href="https://ingra14m.github.io/Deformable-Gaussians/">Deformable
+                                3D Gaussians</a>, SpeeDe3DGS reduces redundant primitives, stabilizes temporal pruning,
+                            and lowers deformation cost — achieving neural-field fidelity at rendering speeds
+                            comparable to non-neural motion models.
                         </p>
                     </div>
 
+                    <h4 class="title is-4">Temporal Sensitivity Pruning</h4>
+                    <div class="content has-text-justified">
+                        <p>
+                            For each Gaussian \(\mathcal{G}_i\), we calculate a <b>Temporal Sensitivity Pruning
+                                (TSP)</b> score \(\tilde{U}_{\mathcal{G}_i}\), which approximates its
+                            second-order sensitivity to the \(L_2\) loss across all training views:
 
-                    <h3 class="title is-4">Temporal Sensitivity Pruning</h2>
+                            \[
+                            \tilde{U}_{\mathcal{G}_i} \approx \nabla_{g_i}^2 L_2 \approx \sum_{\phi, t \in
+                            \mathcal{P}_{gt}} \left( \nabla_{g_i} I_{\mathcal{G}_t}(\phi) \right)^2,
+                            \]
 
-                        <div class="content has-text-justified">
-                            <div class="columns is-centered mt-5">
-                                <div class="content has-text-justified">
-                                    <p>
-                                        For each Gaussian \(\mathcal{G}_i\), we calculate a <b>temporal sensitivity
-                                            pruning score</b> \(\tilde{U}_{\mathcal{G}_i}\), which approximates its
-                                        second-order sensitivity to the \(L_2\) loss across all training views:
+                            where \(g_i\) is the value of \(\mathcal{G}_i\) projected onto image space,
+                            \(\mathcal{P}_{gt}\) denotes the set of training poses and timesteps, and
+                            \(I_{\mathcal{G}_t}(\phi)\) is the rendered image at pose \(\phi\) and timestep
+                            \(t\).
+                        </p>
+                        <p>
+                            Since deformation updates vary acrosss timesteps, these gradients are inherently
+                            time-dependent and capture the second-order effects of each Gaussian
+                            <i>and its deformations</i> on the dynamic scene reconstruction. As such,
+                            \(\tilde{U}_{\mathcal{G}_i}\) reflects each Gaussian's cumulative contribution
+                            to the scene reconstruction over time. We periodically prune low-contributing
+                            Gaussians during training, thereby reducing the neural inference load and
+                            boosting rendering speed.
+                        </p>
 
-                                        \[
-                                        \tilde{U}_{\mathcal{G}_i} \approx \nabla_{g_i}^2 L_2 \approx \sum_{\phi, t \in
-                                        \mathcal{P}_{gt}} \left( \nabla_{g_i} I_{\mathcal{G}_t}(\phi) \right)^2,
-                                        \]
-
-                                        where \(g_i\) is the value of \(\mathcal{G}_i\) projected onto image space,
-                                        \(\mathcal{P}_{gt}\) denotes the set of training poses and timesteps, and
-                                        \(I_{\mathcal{G}_t}(\phi)\) is the rendered image at pose \(\phi\) and timestep
-                                        \(t\).
-                                    </p>
-                                    <p>
-                                        Since deformation updates vary acrosss timesteps, these gradients are inherently
-                                        time-dependent and capture the second-order effects of each Gaussian
-                                        <i>and its deformations</i> on the dynamic scene reconstruction. As such,
-                                        \(\tilde{U}_{\mathcal{G}_i}\) reflects each Gaussian's cumulative contribution
-                                        to the scene reconstruction over time. We periodically prune low-contributing
-                                        Gaussians during training, thereby reducing the neural inference load and
-                                        boosting rendering speed.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="video-compare-container">
-                                <video class="video" width=800p id="v2" loop playsinline autoplay muted
-                                    src="static/videos/bell_side_by_side.mp4" onplay="resizeAndPlay(this)"></video>
-                                <canvas height=0 class="videoMerge" id="v2Merge"></canvas>
-                            </div>
-                            <div class="columns is-centered mt-5">
-                                <div class="content has-text-justified">
-                                    <p>
-                                        Additionally, we introduce an <b>Annealing Smooth Pruning (ASP)</b>
-                                        mechanism that enhances the robustness of pruning to imprecise
-                                        camera poses in real-world scenes. The comparison above illustrates an example
-                                        where ASP produces cleaner results than both standard pruning and the unpruned
-                                        baseline.
-                                        <br><br>
-                                    </p>
-                                </div>
-                            </div>
-
+                        <div class="video-compare-container">
+                            <video class="video" width="800" id="v2" loop playsinline autoplay muted
+                                src="static/videos/bell_side_by_side.mp4" onplay="resizeAndPlay(this)"></video>
+                            <canvas height="0" class="videoMerge" id="v2Merge"></canvas>
                         </div>
+                    </div>
 
-                        <h3 class="title is-4">GroupFlow</h3>
+                    <h4 class="title is-4">Temporal Sensitivity Sampling</h4>
+                    <div class="content has-text-justified">
+                        <p>
+                            While TSP identifies redundant Gaussians, it relies on gradients from discrete training
+                            frames. This may overlook <i>floaters</i> — unstable Gaussians that appear static in
+                            observed views but drift at unseen timestamps. To address this, <b>Temporal Sensitivity
+                                Sampling (TSS)</b> introduces temporal perturbation during sensitivity estimation by
+                            jittering the timestamp input to the deformation field:
+                        </p>
 
-                        <img src="static/images/groupflow.png" alt="GroupFlow"
-                            style="margin-bottom: 1.5rem; max-width: 100%; height: auto;">
+                        <p style="text-align:center;">
+                            \[
+                            (\mu + \Delta\mu, r + \Delta r, s + \Delta s)
+                            = \mathcal{D}(\mu, r, s, t + \mathcal{N}(0,1)\beta\Delta t(1 - i/\tau))
+                            \]
+                        </p>
 
-                        <div class="content has-text-justified">
-                            <p>
-                                Given a dense deformable 3DGS model, each Gaussian \(\mathcal{G}_i\) is represented as a
-                                sequence of mean positions \(\mathcal{M}_i = \{\mu_i^t\}_{t=0}^{F-1}\) across \(F\)
-                                timesteps.
-                            </p>
-                            <p>
-                                We initialize \(J\) control trajectories \(\{h_j^t\}\) via farthest point sampling at
-                                \(t=0\),
-                                and assign each \(\mu_i\) to the most similar \(h_j\) using the following trajectory
-                                similarity score:
-                            </p>
+                        <p>
+                            This temporally jittered sampling reveals unstable primitives early in training, encouraging
+                            robust pruning and suppressing floaters. The noise magnitude decays linearly (annealing),
+                            ensuring precise reconstruction in later stages. Together, TSP and TSS improve temporal
+                            smoothness and enable up to <b>11× fewer Gaussians</b> with comparable image quality to the
+                            unpruned baseline.
+                        </p>
+                    </div>
 
-                            <p style="text-align: center;">
-                                $$
-                                S_{i,j} = \lambda_r \, \mathrm{std}_t(\| \mu_i^t - h_j^t \|) + (1-\lambda_r) \,
-                                \mathrm{mean}_t(\| \mu_i^t - h_j^t \|).
-                                $$
-                            </p>
+                    <h3 class="title is-4">GroupFlow</h3>
+                    <img src="static/images/groupflow.png" alt="GroupFlow"
+                        style="margin-bottom: 1.5rem; max-width: 100%; height: auto;">
+                    <div class="content has-text-justified">
+                        <p>
+                            Even after pruning, dynamic 3D Gaussian Splatting requires predicting a deformation for
+                            every Gaussian, which remains computationally expensive. <b>GroupFlow</b> addresses this by
+                            distilling the learned neural motion field into grouped SE(3) transformations that capture
+                            locally coherent motion.
+                        </p>
 
-                            <p>
-                                We then fit a group-wise SE(3) trajectory to each group \(\mathcal{M}^j\) by aligning
-                                sampled means over time. To predict the deformation of \(\mu_i \in \mathcal{M}^j\) at
-                                timestep \(t\),
-                                we apply a learned SE(3) transformation relative to its control point:
-                            </p>
+                        <p>
+                            Given a dense deformable 3DGS model, each Gaussian \(\mathcal{G}_i\) is represented as a
+                            sequence of mean positions \(\mathcal{M}_i = \{\mu_i^t\}_{t=0}^{F-1}\) across \(F\)
+                            timesteps. We initialize \(J\) control trajectories \(\{h_j^t\}\) via farthest point
+                            sampling at \(t=0\), and assign each \(\mu_i\) to the most similar \(h_j\) using
+                            trajectory similarity score:
+                        </p>
 
-                            <p style="text-align: center;">
-                                $$
-                                \mu_i^t = R_j^t (\mu_i^0 - h_j^0) + h_j^0 + T_j^t.
-                                $$
-                            </p>
+                        <p style="text-align: center;">
+                            $$
+                            S_{i,j} = \lambda_r \, \mathrm{std}_t(\| \mu_i^t - h_j^t \|) + (1-\lambda_r) \,
+                            \mathrm{mean}_t(\| \mu_i^t - h_j^t \|).
+                            $$
+                        </p>
 
-                            <p>
-                                The shared flow parameters \(\{h_j^0, R_j^t, T_j^t\}\) are optimized during training.
-                                This approach — <b>GroupFlow</b> — reduces the number of predicted transformations per
-                                frame
-                                from \(N\) (one per Gaussian) to \(J\) (one per group), significantly accelerating both
-                                training and rendering.
-                            </p>
-                        </div>
+                        <p>
+                            We then fit a group-wise SE(3) trajectory to each group \(\mathcal{M}^j\) by aligning
+                            sampled means over time. To predict the deformation of \(\mu_i \in \mathcal{M}^j\) at
+                            timestep \(t\), we apply a learned SE(3) transformation relative to its control point:
+                        </p>
+
+                        <p style="text-align: center;">
+                            $$
+                            \mu_i^t = R_j^t (\mu_i^0 - h_j^0) + h_j^0 + T_j^t.
+                            $$
+                        </p>
+
+                        <p>
+                            The shared flow parameters \(\{h_j^0, R_j^t, T_j^t\}\) are optimized jointly with the scene.
+                            This formulation distills dense, per-Gaussian neural deformations into a smaller set of
+                            groupwise SE(3) motions, reducing the number of transformations per frame from \(N\) (per
+                            Gaussian) to \(J\) (per group).
+                        </p>
+
+                        <p>
+                            As a result, GroupFlow achieves substantial acceleration during both training and rendering
+                            while maintaining temporally coherent, high-quality motion reconstruction. Beyond
+                            efficiency, this distillation regularizes the learned motion field, smoothing noisy
+                            trajectories and improving robustness in real-world dynamic scenes.
+                        </p>
+                    </div>
                 </div>
             </div>
     </section>
@@ -382,7 +393,7 @@
                 <div class="container is-max-desktop">
                     <div class="columns is-centered has-text-centered">
                         <div class="column is-four-fifths">
-                            <p class="mt-4">
+                            <p class="mt-1">
                                 <em>Videos produced using our SpeeDe3DGS codebase.</em>
                             </p>
                             <figure>
@@ -407,8 +418,6 @@
                                     FPS and baseline Train&nbsp;Time are measured on an RTX&nbsp;3090&nbsp;GPU, while
                                     our
                                     Train&nbsp;Time* is measured on an RTX&nbsp;A5000&nbsp;GPU (both&nbsp;24&nbsp;GB).
-                                    Appendix A.3
-                                    reports per-dataset results.
                                 </figcaption>
                                 <img src="./static/images/monodygaubench.png"
                                     alt="Overall ROC performance table results" style="width:100%; height:auto;">
