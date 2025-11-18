@@ -421,8 +421,8 @@
                                     RTX&nbsp;3090&nbsp;GPU, while our Train&nbsp;Time* is measured on an
                                     RTX&nbsp;A5000&nbsp;GPU (both&nbsp;24&nbsp;GB).
                                 </figcaption>
-                                <img src="./static/images/monodygaubench.png"
-                                    alt="MonoDyGauBench results" style="width:100%; height:auto;">
+                                <img src="./static/images/monodygaubench.png" alt="MonoDyGauBench results"
+                                    style="width:100%; height:auto;">
                             </figure>
                         </div>
                     </div>
@@ -433,7 +433,7 @@
 
     <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
-            <h2 class="title">BibTeX</h2>
+            <h2 class="title" id="BibTeX">BibTeX</h2>
             <pre><code>@article{TuYing2025speede3dgs,
     author    = {Tu, Allen and Ying, Haiyang and Hanson, Alex and Lee, Yonghan and Goldstein, Tom and Zwicker, Matthias},
     title     = {SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping},
@@ -441,6 +441,34 @@
     year      = {2025},
     url       = {https://speede3dgs.github.io/}
 }</code></pre>
+
+            <h3 class="title is-4">Related Work from Our Group</h3>
+            <p>For additional papers on efficient 3D Gaussian Splatting, see our group’s related work below. If your research builds
+                on ours, we encourage you to cite these papers.</p>
+            <ol>
+                <li>
+                    <a href="https://speedysplat.github.io/" target="_blank" rel="noopener">
+                        <strong>Speedy-Splat</strong>
+                    </a>
+                    <em>(CVPR 2025)</em>
+                    <small><a href="https://speedysplat.github.io/#BibTeX" target="_blank">[BibTeX]</a></small>
+                    — Accelerate 3D Gaussian Splatting rendering speed by over 6× and reduce model size by over 90%
+                    through accurately localizing primitives during rasterization and pruning the scene during
+                    training, providing a significantly higher speedup than existing techniques while maintaining
+                    competitive image quality.
+                </li>
+                <li>
+                    <a href="https://pup3dgs.github.io/" target="_blank" rel="noopener">
+                        <strong>PUP-3DGS</strong>
+                    </a>
+                    <em>(CVPR 2025)</em>
+                    <small><a href="https://pup3dgs.github.io/#BibTeX" target="_blank">[BibTeX]</a></small>
+                    — Prune 90% of primitives from any pretrained 3D Gaussian Splatting model using a mathematically
+                    principled sensitivity score, more than tripling rendering speed while retaining more salient
+                    foreground information and higher visual fidelity than previous techniques at a substantially
+                    higher compression ratio.
+                </li>
+            </ol>
         </div>
     </section>
 
