@@ -374,3 +374,19 @@ body {
     aspect-ratio: 16/9;
   }
 }
+/* Math display toggling */
+.math-mobile {
+  display: none;
+}
+.math-desktop {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .math-mobile {
+    display: block;
+  }
+  .math-desktop {
+    display: none;
+  }
+}
