@@ -1,31 +1,43 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
-document.addEventListener('DOMContentLoaded', function () {
-  const options = {
+$(document).ready(function () {
+
+  var options = {
     slidesToScroll: 1,
     slidesToShow: 2,
-    centerMode: true,
+    centerMode: true, // Enable center mode
     loop: true,
     infinite: true,
     autoplay: false,
-    autoplaySpeed: 3000
+    autoplaySpeed: 3000,
+    breakpoints: [{
+      changePoint: 768,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      pagination: true,
+      navigation: false
+    }]
   };
 
-  // Initialize all carousels
-  const carousels = bulmaCarousel.attach('.carousel', options);
+  // Initialize all div with carousel class
+  var carousels = bulmaCarousel.attach('.carousel', options);
 
-  // Add 'before:show' listener to each initialized carousel
-  carousels.forEach(carousel => {
-    carousel.on('before:show', state => {
-      console.log(state);
-    });
-  });
-
-  // Optional: Access a specific element instance
-  const element = document.querySelector('#my-element');
-  if (element && element.bulmaCarousel) {
-    element.bulmaCarousel.on('before:show', function (state) {
+  // Loop on each carousel initialized
+  for (var i = 0; i < carousels.length; i++) {
+    // Add listener to  event
+    carousels[i].on('before:show', state => {
       console.log(state);
     });
   }
-});
+
+  // Access to bulmaCarousel instance of an element
+  var element = document.querySelector('#my-element');
+  if (element && element.bulmaCarousel) {
+    // bulmaCarousel instance is available as element.bulmaCarousel
+    element.bulmaCarousel.on('before-show', function (state) {
+      console.log(state);
+    });
+  }
+
+
+})

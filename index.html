@@ -9,6 +9,74 @@
         content="3D Gaussian Splatting, Dynamic Scenes, Neural Rendering, Computer Graphics, Deformable 3D Gaussian Splatting, De3DGS, Deformable 3DGS, DeformableGS, 3DGS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping</title>
+
+    <link rel="canonical" href="https://speede3dgs.github.io/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://ajax.googleapis.com">
+
+    <meta property="og:title"
+        content="SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping">
+    <meta property="og:description"
+        content="Boost DeformableGS rendering speed from 20 to 276 FPS using temporal sensitivity pruning and groupwise SE(3) motion distillation, while preserving superior image quality.">
+    <meta property="og:url" content="https://speede3dgs.github.io/">
+    <meta property="og:image" content="https://speede3dgs.github.io/static/images/groupflow.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SpeeDe3DGS">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping">
+    <meta name="twitter:description"
+        content="Boost DeformableGS rendering speed from 20 to 276 FPS using temporal sensitivity pruning and groupwise SE(3) motion distillation, while preserving superior image quality.">
+    <meta name="twitter:image" content="https://speede3dgs.github.io/static/images/groupflow.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "SpeeDe3DGS: Speedy Deformable 3D Gaussian Splatting with Temporal Pruning and Motion Grouping",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Allen Tu",
+          "url": "https://tuallen.github.io"
+        },
+        {
+          "@type": "Person",
+          "name": "Haiyang Ying",
+          "url": "https://oceanying.github.io"
+        },
+        {
+          "@type": "Person",
+          "name": "Alex Hanson",
+          "url": "https://www.cs.umd.edu/~hanson/"
+        },
+        {
+          "@type": "Person",
+          "name": "Yonghan Lee",
+          "url": "https://sites.google.com/view/yonghan-lee/home"
+        },
+        {
+          "@type": "Person",
+          "name": "Tom Goldstein",
+          "url": "https://www.cs.umd.edu/~tomg/"
+        },
+        {
+          "@type": "Person",
+          "name": "Matthias Zwicker",
+          "url": "https://www.cs.umd.edu/~zwicker/"
+        }
+      ],
+      "description": "Boost DeformableGS rendering speed from 20 to 276 FPS using temporal sensitivity pruning and groupwise SE(3) motion distillation, while preserving superior image quality.",
+      "image": "https://speede3dgs.github.io/static/images/teaser.jpg",
+      "datePublished": "2025-06-10",
+      "url": "https://speede3dgs.github.io/"
+    }
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J5JNGRK3L"></script>
     <script>
@@ -21,21 +89,21 @@
 
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
-    <link rel="stylesheet" href="./static/css/bulma.min.css">
-    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma.min.css?v=202602181445">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css?v=202602181445">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-    <link rel="stylesheet" href="./static/css/index.css">
-    <link rel="icon" href="./static/images/favicon.ico">
+    <link rel="stylesheet" href="./static/css/index.css?v=202602181445">
+    <link rel="icon" href="./static/images/favicon.ico?v=202602181445">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script defer src="./static/js/fontawesome.all.min.js"></script>
-    <script src="./static/js/bulma-carousel.min.js"></script>
-    <script src="./static/js/index.js"></script>
-    <script src="./static/js/video_comparison.js"></script>
-    <script src="./static/js/script.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js?v=202602181445"></script>
+    <script src="./static/js/bulma-carousel.min.js?v=202602181445"></script>
+    <script src="./static/js/index.js?v=202602181445"></script>
+    <script defer src="./static/js/video_comparison.js?v=202602181445"></script>
+    <script defer src="./static/js/script.js?v=202602181445"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
@@ -49,18 +117,24 @@
                             with<br>Temporal Pruning and Motion Grouping</h1>
                         <div class="is-size-5 publication-authors">
                             <span class="author-block">
-                                <a href="https://tuallen.github.io">Allen Tu*</a>,</span>
+                                <a href="https://tuallen.github.io" target="_blank" rel="noopener noreferrer">Allen
+                                    Tu*</a>,</span>
                             <span class="author-block">
-                                <a href="https://oceanying.github.io">Haiyang Ying*</a>,</span>
+                                <a href="https://oceanying.github.io" target="_blank" rel="noopener noreferrer">Haiyang
+                                    Ying*</a>,</span>
                             <span class="author-block">
-                                <a href="https://www.cs.umd.edu/~hanson/">Alex Hanson</a>,</span>
+                                <a href="https://www.cs.umd.edu/~hanson/" target="_blank" rel="noopener noreferrer">Alex
+                                    Hanson</a>,</span>
                             <span class="author-block">
-                                <a href="https://sites.google.com/view/yonghan-lee/home">Yonghan Lee</a>,</span>
+                                <a href="https://sites.google.com/view/yonghan-lee/home" target="_blank"
+                                    rel="noopener noreferrer">Yonghan Lee</a>,</span>
                             <span class="author-block">
-                                <a href="https://www.cs.umd.edu/~tomg/">Tom Goldstein</a>,
+                                <a href="https://www.cs.umd.edu/~tomg/" target="_blank" rel="noopener noreferrer">Tom
+                                    Goldstein</a>,
                             </span>
                             <span class="author-block">
-                                <a href="https://www.cs.umd.edu/~zwicker/">Matthias Zwicker</a>
+                                <a href="https://www.cs.umd.edu/~zwicker/" target="_blank"
+                                    rel="noopener noreferrer">Matthias Zwicker</a>
                             </span>
                         </div>
 
@@ -68,7 +142,7 @@
                             <span class="author-block">University of Maryland, College Park</span>
                         </div>
 
-                        <div class="columns is-centered has-text-centered">
+                        <div class="columns is-centered has-text-centered" style="margin-bottom: -5px;">
                             <div class="column is-8">
                                 <div class="content">
                                     <p>
@@ -78,38 +152,36 @@
                             </div>
                         </div>
 
-                        <div class="column has-text-centered">
-                            <div class="publication-links">
-                                <!-- PDF Link. -->
-                                <span class="link-block">
-                                    <a href="https://arxiv.org/pdf/2506.07917"
-                                        class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="fas fa-file-pdf"></i>
-                                        </span>
-                                        <span>Paper</span>
-                                    </a>
-                                </span>
-                                <span class="link-block">
-                                    <a href="https://arxiv.org/abs/2506.07917"
-                                        class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="ai ai-arxiv"></i>
-                                        </span>
-                                        <span>arXiv</span>
-                                    </a>
-                                </span>
-                                <!-- Code Link. -->
-                                <span class="link-block">
-                                    <a href="https://github.com/tuallen/speede3dgs/tree/main"
-                                        class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="fab fa-github"></i>
-                                        </span>
-                                        <span>Code</span>
-                                    </a>
-                                </span>
-                            </div>
+                        <div class="publication-links">
+                            <!-- PDF Link. -->
+                            <span class="link-block">
+                                <a href="https://arxiv.org/pdf/2506.07917" target="_blank" rel="noopener noreferrer"
+                                    class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="https://arxiv.org/abs/2506.07917" target="_blank" rel="noopener noreferrer"
+                                    class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+                            <!-- Code Link. -->
+                            <span class="link-block">
+                                <a href="https://github.com/tuallen/speede3dgs/tree/main" target="_blank"
+                                    rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -118,10 +190,11 @@
     </section>
 
     <section class="hero teaser">
-        <div class="container is-max-desktop">
-            <div class="hero-body">
-                <video id="teaser" autoplay muted loop playsinline width="250%">
-                    <source src="./static/videos/teaser.mp4" type="video/mp4">
+        <div class="hero-body">
+            <div class="container is-centered">
+                <video poster="static/images/teaser_poster.jpg" id="teaser" autoplay muted loop playsinline width="100%"
+                    onclick="this.paused ? this.play() : this.pause()">
+                    <source src="./static/videos/teaser_compressed.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -219,7 +292,8 @@
 
                         <div class="video-compare-container">
                             <video class="video" width="800" id="v2" loop playsinline autoplay muted
-                                src="static/videos/bell_side_by_side.mp4" onplay="resizeAndPlay(this)"></video>
+                                src="static/videos/bell_side_by_side_compressed.mp4"
+                                onplay="resizeAndPlay(this)"></video>
                             <canvas height="0" class="videoMerge" id="v2Merge"></canvas>
                         </div>
                     </div>
@@ -236,8 +310,10 @@
 
                         <p style="text-align:center;">
                             \[
-                            (\mu + \Delta\mu, r + \Delta r, s + \Delta s)
-                            = \mathcal{D}(\mu, r, s, t + \mathcal{N}(0,1)\beta\Delta t(1 - i/\tau))
+                            \begin{aligned}
+                            &(\mu + \Delta\mu, r + \Delta r, s + \Delta s) \\
+                            &= \mathcal{D}(\mu, r, s, t + \mathcal{N}(0,1)\beta\Delta t(1 - i/\tau))
+                            \end{aligned}
                             \]
                         </p>
 
@@ -251,7 +327,7 @@
                     </div>
 
                     <h3 class="title is-4">GroupFlow</h3>
-                    <img src="static/images/groupflow.png" alt="GroupFlow"
+                    <img src="static/images/groupflow.webp" alt="GroupFlow" loading="lazy"
                         style="margin-bottom: 1.5rem; max-width: 100%; height: auto;">
                     <div class="content has-text-justified">
                         <p>
@@ -270,10 +346,12 @@
                         </p>
 
                         <p style="text-align: center;">
-                            $$
-                            S_{i,j} = \lambda_r \, \mathrm{std}_t(\| \mu_i^t - h_j^t \|) + (1-\lambda_r) \,
-                            \mathrm{mean}_t(\| \mu_i^t - h_j^t \|).
-                            $$
+                            \[
+                            \begin{aligned}
+                            &S_{i,j} = \lambda_r \, \mathrm{std}_t(\| \mu_i^t - h_j^t \|) \\
+                            &+ (1-\lambda_r) \, \mathrm{mean}_t(\| \mu_i^t - h_j^t \|).
+                            \end{aligned}
+                            \]
                         </p>
 
                         <p>
@@ -313,80 +391,92 @@
             </div>
 
             <div class="container is-centered">
-                <div class="container is-centered">
-                    <div id="results-carousel" class="carousel results-carousel">
-                        <div class="item item-basin">
-                            <video poster="" id="basin" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/basin.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-as">
-                            <video poster="" id="as" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/as.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-bell">
-                            <video poster="" id="bell" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/bell.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-cup">
-                            <video poster="" id="cup" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/cup.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-plate">
-                            <video poster="" id="plate" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/plate.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-sieve">
-                            <video poster="" id="sieve" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/sieve.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                <div id="results-carousel" class="carousel results-carousel">
+                    <div class="item item-basin">
+                        <video poster="static/images/basin_poster.jpg" id="basin" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/basin_compressed.mp4" type="video/mp4">
+                        </video>
                     </div>
-                    <div id="results-carousel" class="carousel results-carousel">
-                        <div class="item item-trex">
-                            <video poster="" id="trex" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/trex.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-bouncingballs">
-                            <video poster="" id="bouncingballs" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/bouncingballs.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-hellwarrior">
-                            <video poster="" id="hellwarrior" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/hellwarrior.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-hook">
-                            <video poster="" id="hook" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/hook.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-jumpingjacks">
-                            <video poster="" id="jumpingjacks" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/jumpingjacks.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-lego">
-                            <video poster="" id="lego" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/lego.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-mutant">
-                            <video poster="" id="mutant" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/mutant.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="item item-standup">
-                            <video poster="" id="standup" autoplay controls muted loop playsinline height="100%">
-                                <source src="static/videos/standup.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                    <div class="item item-as">
+                        <video poster="static/images/as_poster.jpg" id="as" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/as_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-bell">
+                        <video poster="static/images/bell_poster.jpg" id="bell" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/bell_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-cup">
+                        <video poster="static/images/cup_poster.jpg" id="cup" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/cup_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-plate">
+                        <video poster="static/images/plate_poster.jpg" id="plate" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/plate_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-sieve">
+                        <video poster="static/images/sieve_poster.jpg" id="sieve" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/sieve_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div id="results-carousel-2" class="carousel results-carousel">
+                    <div class="item item-trex">
+                        <video poster="static/images/trex_poster.jpg" id="trex" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/trex_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-bouncingballs">
+                        <video poster="static/images/bouncingballs_poster.jpg" id="bouncingballs" autoplay muted loop
+                            playsinline height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/bouncingballs_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-hellwarrior">
+                        <video poster="static/images/hellwarrior_poster.jpg" id="hellwarrior" autoplay muted loop
+                            playsinline height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/hellwarrior_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-hook">
+                        <video poster="static/images/hook_poster.jpg" id="hook" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/hook_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-jumpingjacks">
+                        <video poster="static/images/jumpingjacks_poster.jpg" id="jumpingjacks" autoplay muted loop
+                            playsinline height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/jumpingjacks_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-lego">
+                        <video poster="static/images/lego_poster.jpg" id="lego" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/lego_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-mutant">
+                        <video poster="static/images/mutant_poster.jpg" id="mutant" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/mutant_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="item item-standup">
+                        <video poster="static/images/standup_poster.jpg" id="standup" autoplay muted loop playsinline
+                            height="100%" onclick="this.paused ? this.play() : this.pause()">
+                            <source src="static/videos/standup_compressed.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
                 <div class="container is-max-desktop">
@@ -420,8 +510,8 @@
                                     RTX&nbsp;3090&nbsp;GPU, while our Train&nbsp;Time* is measured on an
                                     RTX&nbsp;A5000&nbsp;GPU (both&nbsp;24&nbsp;GB).
                                 </figcaption>
-                                <img src="./static/images/monodygaubench.png" alt="MonoDyGauBench results"
-                                    style="width:100%; height:auto;">
+                                <img src="./static/images/monodygaubench.webp" alt="MonoDyGauBench results"
+                                    loading="lazy" style="width:100%; height:auto;">
                             </figure>
                         </div>
                     </div>
@@ -475,11 +565,14 @@
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                <a class="icon-link" href="https://arxiv.org/pdf/2506.07917" class="external-link">
+                <a class="icon-link" href="https://arxiv.org/pdf/2506.07917" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-file-pdf"></i>
                 </a>
-                <a class="icon-link" href="https://github.com/tuallen/speede3dgs/tree/main" class="external-link"
-                    disabled>
+                <a class="icon-link" href="https://arxiv.org/abs/2506.07917" target="_blank" rel="noopener noreferrer">
+                    <i class="ai ai-arxiv"></i>
+                </a>
+                <a class="icon-link" href="https://github.com/tuallen/speede3dgs/tree/main" target="_blank"
+                    rel="noopener noreferrer">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
@@ -502,7 +595,9 @@
                         <p>
                             We thank the authors of <a rel="nerfies"
                                 href="https://github.com/nerfies/nerfies.github.io/tree/main">Nerfies</a>
-                            for generously open-sourcing the templates used in this website.
+                            for generously <a
+                                href="https://github.com/speede3dgs/speede3dgs.github.io">open-sourcing</a> the
+                            template used in this website.
                         </p>
                     </div>
                 </div>
