@@ -347,7 +347,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .video-compare-container {
-    width: calc(100% - 1.5rem);
+    width: 100%;
   }
 
   .results-carousel .slider-pagination {
@@ -374,10 +374,12 @@ body {
     aspect-ratio: 16/9;
   }
 }
+
 /* Math display toggling */
 .math-mobile {
   display: none;
 }
+
 .math-desktop {
   display: block;
 }
@@ -386,6 +388,7 @@ body {
   .math-mobile {
     display: block;
   }
+
   .math-desktop {
     display: none;
   }
