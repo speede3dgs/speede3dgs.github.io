@@ -244,9 +244,18 @@
                     <h2 class="title is-3">Method</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Neural motion fields in dynamic 3D Gaussian Splatting (3DGS) enable highly detailed
-                            reconstructions, but per-Gaussian neural inference at every frame limits real-time
-                            performance.
+                            Dynamic Gaussian Splatting extends the set of 3D Gaussians \(\mathcal{G}\) with a
+                            deformation network \(\mathcal{D}\) that predicts time-varying offsets for the means
+                            \(\mu_i\), rotations \(r\), and scales \(s\) at each timestep \(t\):
+
+                            \[
+                            (\mu + \Delta\mu_t,\, r + \Delta r_t,\, s + \Delta s_t) = \mathcal{D}(\mu, r, s, t).
+                            \]
+
+                            Motion models fall in two categories: <b>neural motion</b> is slow but produces high visual
+                            fidelity, while <b>non-neural motion</b> is fast but produces lower visual fidelity.
+                        </p>
+                        <p>
                             <b>Speedy Deformable 3D Gaussian Splatting (SpeeDe3DGS)</b> bridges this efficiency–fidelity
                             gap through three complementary modules that jointly reduce redundant inference, stabilize
                             temporal consistency, and distill neural motion into compact rigid representations:
